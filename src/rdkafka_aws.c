@@ -262,11 +262,11 @@ static char *rd_kafka_aws_build_canonical_request (const char *hostname,
         unsigned int md_len, i;
         EVP_MD_CTX *mdctx;
         
-        mdctx = EVP_MD_CTX_new();
+        mdctx = EVP_MD_CTX_create();
         EVP_DigestInit_ex(mdctx, md, NULL);
         EVP_DigestUpdate(mdctx, request_parameters, strlen(request_parameters));
         EVP_DigestFinal_ex(mdctx, md_value, &md_len);
-        EVP_MD_CTX_free(mdctx);
+        EVP_MD_CTX_destroy(mdctx);
 
         char payload_hash[65];
         for (i = 0; i < md_len; i++)
@@ -307,11 +307,11 @@ static char *rd_kafka_aws_build_string_to_sign (const char *algorithm,
         unsigned int md_len, i;
         EVP_MD_CTX *mdctx;
         
-        mdctx = EVP_MD_CTX_new();
+        mdctx = EVP_MD_CTX_create();
         EVP_DigestInit_ex(mdctx, md, NULL);
         EVP_DigestUpdate(mdctx, canonical_request, strlen(canonical_request));
         EVP_DigestFinal_ex(mdctx, md_value, &md_len);
-        EVP_MD_CTX_free(mdctx);
+        EVP_MD_CTX_destroy(mdctx);
 
         char hashed_canonical_request[65];
         for (i = 0; i < md_len; i++)
