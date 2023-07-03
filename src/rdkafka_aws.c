@@ -457,7 +457,6 @@ int rd_kafka_aws_send_request (rd_kafka_aws_credential_t *credential,
                 curl_easy_setopt(curl, CURLOPT_URL, curl_host);
 
                 curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-                curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
 
                 req.buffer = rd_malloc(CHUNK_SIZE);
                 req.buflen = CHUNK_SIZE;
